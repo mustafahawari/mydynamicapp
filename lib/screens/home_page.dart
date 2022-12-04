@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:meroapp/model/content_model.dart';
 import 'package:meroapp/network/api_services.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,10 +22,11 @@ class HomePage extends StatelessWidget {
           future: ApiServices.getContent(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              List<ContentModel> result = snapshot.data;
               return Padding(
                 padding: const EdgeInsets.all(20),
                 child: ListView.separated(
-                  itemCount: 10,
+                  itemCount: result.length,
                   separatorBuilder: (context, index) => SizedBox(
                     height: 10,
                   ),
@@ -35,11 +38,15 @@ class HomePage extends StatelessWidget {
                           height: 200,
                           width: double.infinity,
                           color: Colors.grey,
+                          child: Image.network(
+                            result[index].imageUrl!,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            "Title",
+                            result[index].title!,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -48,12 +55,13 @@ class HomePage extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Text(
-                            "Small Description",
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
+                          child: Html(data: result[index].shortDescription!)
+                          // Text(
+                          //   result[index].shortDescription!,
+                          //   style: TextStyle(
+                          //     fontSize: 16,
+                          //   ),
+                          // ),
                         ),
                       ],
                     );
@@ -64,7 +72,7 @@ class HomePage extends StatelessWidget {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if(snapshot.hasError) {
+            } else if (snapshot.hasError) {
               return Center(
                 child: Container(
                   child: Text("Err"),
