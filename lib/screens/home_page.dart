@@ -18,7 +18,11 @@ class HomePage extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.white,
+        actions: [
+          DrawerWidget()
+        ],
       ),
+      drawer: Drawer(),
       body: FutureBuilder(
           future: ApiServices.getContent(),
           builder: (context, snapshot) {
@@ -37,7 +41,10 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailsPage(),
+                            builder: (context) => DetailsPage(
+                              details: result[index].details!,
+                              imageUrl: result[index].imageUrl!,
+                            ),
                           ),
                         );
                       },
@@ -93,5 +100,15 @@ class HomePage extends StatelessWidget {
             return Container();
           }),
     );
+  }
+}
+class DrawerWidget extends StatelessWidget {
+  const DrawerWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(onPressed: () {
+      Scaffold.of(context).openDrawer();
+    }, icon: Icon(Icons.menu, color: Colors.black,));
   }
 }

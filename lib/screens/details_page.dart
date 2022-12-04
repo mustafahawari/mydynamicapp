@@ -11,18 +11,21 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            height: 250,
-            width: double.infinity,
-            color: Colors.grey,
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Html(data: details)
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 250,
+              width: double.infinity,
+              color: Colors.grey,
+              child: Image.network(imageUrl),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Html(data: details)
+          ],
+        ),
       ),
     );
   }
