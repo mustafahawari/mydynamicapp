@@ -17,20 +17,45 @@ class HomePage extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-      body: ListView.separated(
-        itemCount: 10,
-        separatorBuilder: (context, index) => SizedBox(height: 10,),
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Container(
-                height: 200,
-                width: double.infinity,
-                color: Colors.grey,
-              ),
-            ],
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ListView.separated(
+          itemCount: 10,
+          separatorBuilder: (context, index) => SizedBox(
+            height: 10,
+          ),
+          itemBuilder: (context, index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  color: Colors.grey,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    "Title",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    "Small Description",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
