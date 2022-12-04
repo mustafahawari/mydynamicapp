@@ -34,7 +34,12 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsPage(),
+                          ),
+                        );
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,15 +64,15 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Html(data: result[index].shortDescription!)
-                            // Text(
-                            //   result[index].shortDescription!,
-                            //   style: TextStyle(
-                            //     fontSize: 16,
-                            //   ),
-                            // ),
-                          ),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Html(data: result[index].shortDescription!)
+                              // Text(
+                              //   result[index].shortDescription!,
+                              //   style: TextStyle(
+                              //     fontSize: 16,
+                              //   ),
+                              // ),
+                              ),
                         ],
                       ),
                     );
