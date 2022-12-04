@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:meroapp/model/content_model.dart';
 import 'package:meroapp/network/api_services.dart';
+import 'package:meroapp/screens/details_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -31,39 +32,44 @@ class HomePage extends StatelessWidget {
                     height: 10,
                   ),
                   itemBuilder: (context, index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 200,
-                          width: double.infinity,
-                          color: Colors.grey,
-                          child: Image.network(
-                            result[index].imageUrl!,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Text(
-                            result[index].title!,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage()));
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 200,
+                            width: double.infinity,
+                            color: Colors.grey,
+                            child: Image.network(
+                              result[index].imageUrl!,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Html(data: result[index].shortDescription!)
-                          // Text(
-                          //   result[index].shortDescription!,
-                          //   style: TextStyle(
-                          //     fontSize: 16,
-                          //   ),
-                          // ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              result[index].title!,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Html(data: result[index].shortDescription!)
+                            // Text(
+                            //   result[index].shortDescription!,
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //   ),
+                            // ),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
